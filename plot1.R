@@ -35,7 +35,6 @@ hpd$Date <- dmy(hpd$Date)
 sub.hpd <- subset(hpd, hpd$Date == ymd("2007-02-01") | hpd$Date == ymd("2007-02-02"))
 
 # create histogram and save as png file
-
+png(filename="plot1.png", width = 480, height = 480)
 hist(sub.hpd$Global_active_power, col="red", xlab="Global Active Power (kilowatts)", main="Global Active Power")
-dev.copy(png,file="plot1.png")
 dev.off
