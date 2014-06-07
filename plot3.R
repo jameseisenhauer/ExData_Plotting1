@@ -32,11 +32,18 @@ if (!exists("hpd")){
 
 
 # subset data
-sub2.hpd <- subset(hpd, hpd$Date == ymd("2007-02-01") | hpd$Date == ymd("2007-02-02"))
+sub3.hpd <- subset(hpd, hpd$Date == ymd("2007-02-01") | hpd$Date == ymd("2007-02-02"))
 # merge date and time
-sub2.hpd$Date <- paste(sub2.hpd$Date,sub2.hpd$Time)
-sub2.hpd$Date <- ymd_hms(sub2.hpd$Date, tz ="GMT")
-#create plot and save as png
-png(filename="plot2.png", width = 480, height = 480)
-plot(sub2.hpd$Date, sub2.hpd$Global_active_power, type="l", ylab="Global Active Power (kilowatts)", xlab="")
+sub3.hpd$Date <- paste(sub3.hpd$Date,sub3.hpd$Time)
+sub3.hpd$Date <- ymd_hms(sub3.hpd$Date, tz ="GMT")
+
+# create plot and save as png
+png(filename="plot3.png", width = 480, height = 480)
+plot(sub3.hpd$Date,sub3.hpd$Sub_metering_1, type="l", ylab="Energy sub metering", xlab="")
+lines(sub3.hpd$Date,sub3.hpd$Sub_metering_2, type="l", col="red")
+lines(sub3.hpd$Date,sub3.hpd$Sub_metering_3, type="l", col="blue")
+legend("topright",legend=c("sub_metering_1","sub_metering_2","sub_metering_3"), lty=c(1, 1, 1),   
+       lwd=c(2.5, 2.5, 2.5),  
+       col=c("black", "red", "blue"),  )
+
 dev.off
